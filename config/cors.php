@@ -22,6 +22,7 @@ return [
     'allowed_origins' => [
         'http://localhost:5173',
         'http://localhost:5174',
+        'https://tasknest-client.netlify.app/'
     ],
 
     'allowed_origins_patterns' => [],
