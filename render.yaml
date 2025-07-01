@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: tasknest-api
+    env: docker
+    plan: free
+    region: oregon
+    branch: main # или master — в зависимости от твоей ветки
+    dockerfilePath: Dockerfile
+    buildFilter:
+      paths:
+        - Dockerfile
+        - .dockerignore
+        - render.yaml
+        - app/**
+        - routes/**
+        - composer.json
+        - composer.lock
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://tasknest-api.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: tasknest-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: tasknest-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: tasknest-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: tasknest-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: tasknest-db
+          property: password
+      - key: APP_KEY
+        sync: false # Введи вручную через Render UI
+
+databases:
+  - name: tasknest-db
+    databaseName: tasknest
+    user: tasknest_user
+    plan: free
