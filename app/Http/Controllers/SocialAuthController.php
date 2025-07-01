@@ -28,10 +28,10 @@ class SocialAuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->make("
-        <script>
-          window.opener.postMessage({ token: '$token' }, 'http://localhost:5174');
-          window.close();
-        </script>
-    ");
+            <script>
+                window.opener.postMessage({ token: '$token' }, '" . config('app.frontend_url') . "');
+                window.close();
+            </script>
+        ");
     }
 }
