@@ -19,9 +19,12 @@ Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth:san
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index']);
+    Route::get('/tasks/trash', [TaskController::class, 'trash']);
     Route::post('/tasks', [TaskController::class, 'store']);
     Route::put('/tasks/{task}', [TaskController::class, 'update']);
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
+    Route::post('/tasks/{task}/restore', [TaskController::class, 'restore']);
+    Route::delete('/tasks/trash/clear', [TaskController::class, 'clearTrash']);
 });
 
 Route::get('/auth/google/redirect', [SocialAuthController::class, 'redirect']);
