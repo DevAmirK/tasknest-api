@@ -77,14 +77,11 @@ class TaskController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
 
-        $task->update([
-            'status' => 2,
-            'deleted_at' => now(),
-        ]);
+        $task->delete();
 
         Cache::forget("user:{$request->user()->id}:tasks");
 
-        return response()->json(['message' => 'Task moved to trash']);
+        return response()->json(['message' => 'Task permanently deleted']);
     }
 
     public function trash(Request $request)
