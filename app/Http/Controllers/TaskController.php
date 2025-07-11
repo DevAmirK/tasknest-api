@@ -53,7 +53,7 @@ class TaskController extends Controller
         }
 
         $data = $request->validate([
-            'text' => 'string|nullable',
+            'text' => 'nullable|string',
             'done' => 'boolean|nullable',
             'status' => 'integer|in:0,1,2|nullable',
             'color' => 'string|size:7|nullable',
